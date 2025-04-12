@@ -44,8 +44,8 @@ public class HomeController {
     }
 
     @PostMapping("/userCreation")
-    @ResponseBody
-    public Map<String, String> createUser(@ModelAttribute User user ,  @RequestParam("photo") MultipartFile photo) 
+    
+    public String createUser(@ModelAttribute User user ,  @RequestParam("filePhoto") MultipartFile photo1,  RedirectAttributes redirectAttributes)
     {
     	
         System.out.println("Username: " + user.toString());
@@ -53,7 +53,7 @@ public class HomeController {
         Map<String, String> response = new HashMap<>();
 
         if (dbUser.isEmpty()) {
-            homeService.addUser(user,photo);
+            homeService.addUser(user,photo1);
             response.put("status", "success");
             response.put("message", "User created successfully.");
         } else {
@@ -61,7 +61,8 @@ public class HomeController {
             response.put("message", "Email already registered.");
         }
 
-        return response;
+        redirectAttributes.addFlashAttribute("message", "Username updated successfully!");
+        return "redirect:/users";
 
 
         

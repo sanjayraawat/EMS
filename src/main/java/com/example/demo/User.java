@@ -1,11 +1,13 @@
 package com.example.demo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name="user_data")
@@ -18,10 +20,21 @@ public class User
     private String email;
     private String password;
     private long organizationId;
+    @Transient // This field won't be persisted in the database
+    private String base64Photo;
     
     @Lob
+    @Column(name = "photo", columnDefinition="LONGBLOB")
     private byte[] photo;
     
+    public String getBase64Photo() {
+        return base64Photo;
+    }
+
+    public void setBase64Photo(String base64Photo) {
+        this.base64Photo = base64Photo;
+    }
+    @Transient
     public byte[] getPhoto() {
 		return photo;
 	}
