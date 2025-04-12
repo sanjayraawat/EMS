@@ -55,10 +55,10 @@
 <body>
     <div class="container">
         <h2>Create User</h2>
-        <form id="userForm" enctype="multipart/form-data">
+        <form id="userForm" enctype="multipart/form-data" action="/userCreation" method="post">
 			<div class="form-group">
-			    <label for="photo">Upload Photo</label>
-			    <input type="file" id="photo" name="photo" accept="image/*">
+			    <label for="filePhoto">Upload Photo</label>
+			    <input type="file" id="photo" name="filePhoto" accept="image/*">
 			</div>
             <div class="form-group">
                 <label for="username">Username</label>
@@ -78,39 +78,14 @@
 			       <option disabled selected value="">-- Select an Organization --</option>
 			       <th:block th:each="org : ${organizations}">
 			           <option th:value="${org.id}" th:text="${org.name}"></option>
+					   
 			       </th:block>
+				   <option value="1">new</option>
 			   </select>
             <button type="submit">Create Account</button>
         </form>
     </div>
 
-    <script>
-        document.getElementById("userForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-            let formData = new FormData(this);
-            let errorMessage = document.getElementById("errorMessage");
-
-            fetch("/userCreation", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    console.log("User created successfully");
-                    window.location.href = "/users"; // Redirect to user list page
-                } else {
-                    errorMessage.style.display = "block";
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                errorMessage.style.display = "block";
-            });
-        });
-
-     
-    </script>
+    
 </body>
 </html>
-
