@@ -4,24 +4,44 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user_data")
-public class User {
+@Table(name="user_data")
+public class User 
+{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	private String username;
-	private String email;
-	private String password;
+    private String email;
+    private String password;
+    private long organizationId;
+    
+    @Lob
+    private byte[] photo;
+    
+    public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	public long getOrganizationId() {
+		return organizationId;
+	}
 	
+	public void setOrganizationId(long organizationId) {
+		this.organizationId = organizationId;
+	}
 	public User() {}
 	public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
+    
 	public String getUsername() {
 		return username;
 	}
@@ -40,10 +60,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", email=" + email + ", password=" + password + "]";
-	}
-	
-	
+
 }
