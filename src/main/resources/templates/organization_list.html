@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+ 
+        body {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding-top: 80px; /* Adjusted for fixed header */
+        }
+ 
+        /* Table Styling */
+        .table-container {
+            width: 90%;
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 20px;
+        }
+ 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+ 
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+ 
+        th {
+            background: #007BFF;
+            color: white;
+            font-weight: bold;
+        }
+ 
+        tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+ 
+        tbody tr:hover {
+            background: #e2e6ea;
+            transition: 0.3s;
+        }
+ 
+        /* Edit Button */
+		.edit-btn {
+		    display: inline-block;
+		    padding: 6px 12px;
+		    color: white;
+		    background: #28a745;
+		    text-decoration: none;
+		    border-radius: 5px;
+		    font-size: 14px;
+		    line-height: 1;           /* ✅ Ensures vertical alignment */
+		    vertical-align: middle;   /* ✅ Aligns better in the table row */
+		    margin: 0;                /* Prevent weird offset */
+		}
+
+ 
+        .edit-btn:hover {
+            background: #218838;
+        }
+ 
+    </style>
+</head>
+<body>
+ 
+    <!-- Importing Header -->
+    <div th:insert="~{header :: body}"></div>
+ 
+   
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Organization Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+					<th>Address</th>
+					<th>Website</th>
+					 <!-- New Column for Edit -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through users -->
+                <tr th:each="organization : ${organizations}">
+					<td>
+					           <span th:text="${organization.name}" th:id="'username_'+${organization.email}" onclick="makeEditable(this)"></span>
+					           <input type="text" th:value="${organization.name}" th:id="'input_name_'+${organization.email}" class="edit-input" style="display: none;" />
+					       </td>
+                    <td th:text="${organization.email}"></td>
+					<td th:text="${organization.phoneNumber}"></td>
+					<td th:text="${organization.address}"></td>
+					<td th:text="${organization.website}"></td>
+                    <td>
+						<a class="edit-btn"
+						   th:href="@{'/updateorganization/'+ ${organization.email}}"
+						   th:data-url="@{'/updateorganization?id=' + ${organization.email} + '&name=' + ${organization.name}}"
+						   >
+						    ✏ Edit
+						</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ 
+</body>
+<script>
+	function makeEditable(element) {
+	      let userId = element.id.split("_")[1];
+		  console.log(userId);
+	      let span = document.getElementById("username_" + userId);
+	      let input = document.getElementById("input_username_" + userId);
+	     // let saveBtn = document.getElementById("save_" + userId);
+ 
+	      span.style.display = "none"; // Hide text
+	      input.style.display = "inline-block"; // Show input
+	      input.focus(); // Focus on input
+	     // saveBtn.style.display = "inline-block"; // Show save button
+	  }
+	  function updateUsername(button) {
+		let urlParams = button.getAttribute('data-url');
+		console.log(urlParams);
+				
+	         fetch(`/updateUsername/${urlParams}`, {
+	             method: "POST",
+	             headers: {
+	                 "Content-Type": "application/json"
+	             },
+	         })
+	     }
+</script>
+</html>
