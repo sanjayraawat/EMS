@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zoho HR Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      background: #f4f6f8;
+      color: #333;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 80px;
+      background-color: #00264d;
+      color: #fff;
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar-icon {
+      margin: 1rem 0;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Main Content */
+    .main {
+      flex-grow: 1;
+    }
+
+    .topbar {
+      background: #fff;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .tab {
+      cursor: pointer;
+      padding-bottom: 0.3rem;
+    }
+
+    .active-tab {
+      border-bottom: 3px solid #0073e6;
+      font-weight: bold;
+      color: #0073e6;
+    }
+
+    /* Content Layout */
+    .content {
+      display: flex;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    .left-card {
+      width: 280px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .left-card img {
+      width: 80px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .checkin-box {
+      margin: 1rem 0;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .right-panel {
+      flex-grow: 1;
+    }
+
+    .timeline-entry {
+      background: #fff;
+      padding: 1rem 1.5rem;
+      border-left: 6px solid #0073e6;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .timeline-entry h4 {
+      margin-bottom: 0.3rem;
+      color: #0073e6;
+    }
+
+    .timeline-date {
+      font-size: 0.9rem;
+      color: #999;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-msg {
+      font-size: 0.95rem;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-icon">🏠</div>
+    <div class="sidebar-icon">🕓</div>
+    <div class="sidebar-icon">📄</div>
+    <div class="sidebar-icon">📅</div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tabs">
+        <div class="tab">Overview</div>
+        <div class="tab">Dashboard</div>
+        <div class="tab">Calendar</div>
+        <div class="tab active-tab">Career History</div>
+        <div class="tab">HR Process</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Left Employee Card -->
+      <div class="left-card">
+        <img src="https://i.pravatar.cc/100?img=47" alt="Christine Spalding">
+        <h3>Christine Spalding</h3>
+        <p style="color:gray;">HR Manager</p>
+
+        <div class="checkin-box">
+          <div style="font-size: 1.2rem;">08 : 08 : 17</div>
+          <button style="margin-top: 0.5rem; padding: 0.4rem 1rem; background: #ff4d4d; color: #fff; border: none; border-radius: 6px;">Check-out</button>
+        </div>
+
+        <hr style="margin: 1rem 0;">
+
+        <p><strong>Reporting to:</strong> Jones Terri</p>
+        <p><strong>Reportees:</strong> Randall Gladstone</p>
+      </div>
+
+      <!-- Career History Timeline -->
+      <div class="right-panel">
+        <div class="timeline-entry">
+          <div class="timeline-date">19 December 2024</div>
+          <h4>Location: Dubai</h4>
+          <p class="timeline-msg">Your Location has been updated.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="timeline-date">17 May 2024</div>
+          <h4>Designation: HR Head</h4>
+          <p class="timeline-msg">Your Designation has been updated.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="timeline-date">05 March 2024</div>
+          <h4>Department: Human Resources</h4>
+          <p class="timeline-msg">Your Department and Location have been updated.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

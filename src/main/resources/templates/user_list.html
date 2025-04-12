@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+	<link rel="stylesheet" href="/css/user_list.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+
+<body>
+	
+
+    <!-- Importing Header -->
+    <div th:insert="~{header :: body}"></div>
+	
+	<div class="header-line"></div>
+   
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Edit</th> <!-- New Column for Edit -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through users -->
+                <tr th:each="user : ${users}">
+					<td>
+					           <span th:text="${user.username}" th:id="'username_'+${user.email}" onclick="makeEditable(this)"></span>
+					           <input type="text" th:value="${user.username}" th:id="'input_username_'+${user.email}" class="edit-input" style="display: none;" />
+					       </td>
+                    <td th:text="${user.email}"></td>
+                    <td>
+						<a class="edit-btn"
+						   th:href="@{'/updateUsername/'+ ${user.email}}"
+						   th:data-url="@{'/updateUsername?' + ${user.email} + '&username=' + ${user.username}}"
+						   >
+						    ✏ Edit
+						</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+		
+    </div>
+	<div class="chart-container" style="width: 80%; margin: 40px auto;">
+				    <canvas id="userChart"></canvas>
+				</div>
+</body>
+<script src="/js/user_list.js"></script>
+
+</html>
