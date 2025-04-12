@@ -21,6 +21,7 @@
         <table>
             <thead>
                 <tr>
+					<th></th>
                     <th>User Name</th>
                     <th>Email</th>
                     <th>Edit</th> <!-- New Column for Edit -->
@@ -29,6 +30,11 @@
             <tbody>
                 <!-- Loop through users -->
                 <tr th:each="user : ${users}">
+					<td>
+					                   <!-- Display photo if available -->
+									   <img th:src="'data:image/jpeg;base64,' + ${user.base64Photo}" 
+									                           alt="User Photo" class="round-image"/>
+					               </td>
 					<td>
 					           <span th:text="${user.username}" th:id="'username_'+${user.email}" onclick="makeEditable(this)"></span>
 					           <input type="text" th:value="${user.username}" th:id="'input_username_'+${user.email}" class="edit-input" style="display: none;" />
